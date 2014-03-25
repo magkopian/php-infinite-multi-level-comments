@@ -1,0 +1,90 @@
+/**********************************************\
+* Copyright (c) 2014 Manolis Agkopian          *
+* See the file LICENCE for copying permission. *
+\**********************************************/
+
+/*Comment Section*/
+.comment-section ul {
+	list-style:none;
+}
+
+.comment-section li {
+	width: 400px;
+}
+
+.comment-section > ul, .comment-section > ul > li > ul{
+	padding-left: 0;
+}
+
+.message-body {
+	margin-top: 10px;
+}
+
+.author {
+	font-weight: bold;
+}
+
+.comment-msg {
+	font-style: italic;
+}
+
+.msg-text {
+	margin-top: 5px;
+}
+
+.msg-text textarea {
+	width: 100%;
+	height: 100px;
+	resize: none;
+}
+
+.msg-text .txtfield {
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.msg-text .txtfield[name="author-surname"] {
+	display: none;
+}
+
+.hide-reply-box, .msg-text {
+	display: none;
+}
+
+.reply-button:hover, .hide-reply-box:hover {
+	cursor: pointer;
+}
+
+/*Error Messages*/
+.message{
+	background-size: 40px 40px;                                     
+	box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+	width: 100%;
+	border: 1px solid;
+	padding: 15px;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.error{
+	background-color: #DE4343;
+	border-color: #FF000;
+	color: #FFF;
+	display: none;
+}
+     
+.warning{
+	background-color: #FEEFB3;
+	border-color: orange;
+	color: orange;
+	display: none;
+}
+
+.message h3{
+	margin: 0 0 5px 0;                                                  
+}
+
+.message p{
+	margin: 0;                                                  
+}
