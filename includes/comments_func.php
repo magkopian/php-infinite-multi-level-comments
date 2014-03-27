@@ -12,47 +12,17 @@ if (!defined('INCLUDED')){
 	die();
 }
 
-function get_comments() {
-	// Connect to database
-	try {
-		require 'dbconnect.php';
-	}
-	catch (PDOException $e) {
-		return false;
-	}
-	
+function get_comments() {	
 	require 'classes/TreeNode.php';
 	
-	// Get root nodes
 	try {
-		$res = $handler->query('
-			SELECT `cid`, `message`, `parent`, `children`, `time`, `author_name`  AS `author`
-			FROM `comment`
-			WHERE `parent` IS NULL
-			ORDER BY `time` DESC
-		');
-		
-		if ($res->rowCount() === 0) { // If table is empty
-			return -1;
-		}
-		
-		// Each root node will make a query to ask for its children
-		$res->setFetchMode(PDO::FETCH_CLASS, 'TreeNode');
-		
-		// Add root nodes to the tree
-		$tree = array();
-		while ( $result = $res->fetch() ) {
-			$tree[$result->getCid()] = $result;
-		}
+		$tree = new TreeNode(true); // We create a peudo-node that will fetch all node with null parent
 	}
-	catch (PDOException $e) {
-		return false;
-	}
-	catch (Exception $e) { // Database returned no children while children field in database is 1
+	catch (Exception $e) {
 		return false;
 	}
 	
-	return $tree;
+	return $tree->getChildren($tree); // We don't want the peudo-node so we just return its children
 }
 
 function insert_comment($msg, $parent, $author_name, $author_email) {

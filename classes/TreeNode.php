@@ -13,36 +13,69 @@ if (!defined('INCLUDED')){
 }
 
 Class TreeNode {
-	private $cid = -1; // Comment id
+	private $cid = null; // Comment id
 	private $message = ''; // Message text
 	private $author = ''; // Author name
 	private $time = ''; // The time when comment has been posted
 	private $parent = null; // Comment id of the parent comment
 	private $children = false; // If the node has children 1 otherwise 0 (hasChildren() method returns true/false)
 	private $childrenList = null; // Array with children objects
+	private $preparedStatement = null; // The prepared statement that gets the child nodes
 	
-	public function __construct() {
+	public function __construct($rootNode = false, $preparedStatement = null) {
 		if ($this->hasChildren()) {
+			if ( $preparedStatement === null ) { // If this is a root node the statement hasn't been prepared yet so we prepare it
+				// Connect to database
+				require 'includes/dbconnect.php';
+				
+				// Get comments from database
+				$this->preparedStatement = $handler->prepare('
+					SELECT `cid`, `message`, `parent`, `children`, `time`, `author_name` AS `author` 
+					FROM `comment`
+					WHERE `parent` = :parent
+					ORDER BY `time` DESC
+				');
+			}
+			else { // If this is not a root node the statement has been prepared already
+				$this->preparedStatement = $preparedStatement;
+			}			
+			
+			// Bind the cid of the current node as parent and execute the statement
+			$this->preparedStatement->execute( array(
+				':parent' => $this->cid
+			));
+			
+			// If table is empty
+			if ($this->preparedStatement->rowCount() === 0) {
+				throw new Exception('Error: Database returned no results');
+			}
+			
+			// Add children to node
+			while ( $child = $this->preparedStatement->fetchObject('TreeNode', array(false, $this->preparedStatement)) ) {
+				$this->addChild($child);
+			}
+		}
+		else if ($rootNode === true) { // If this is a root node
 			// Connect to database
 			require 'includes/dbconnect.php';
 			
 			// Get comments from database
-			$res = $handler->query('
-				SELECT `cid`, `message`, `parent`, `children`, `time`, `author_name` AS `author` 
+			$statement = $handler->query('
+				SELECT `cid`, `message`, `parent`, `children`, `time`, `author_name` AS `author`
 				FROM `comment`
-				WHERE `parent` = ' . $this->cid . '
+				WHERE `parent` IS NULL
 				ORDER BY `time` DESC
 			');
 			
-			if ($res->rowCount() === 0) { // If table is empty
-				throw new Exception('Error: Database returned no results');
+			// If table not empty
+			if ($statement->rowCount() > 0) {
+				// Add children to node
+				while ( $child = $statement->fetchObject('TreeNode', array(false)) ) {
+					$this->addChild($child);
+				}
 			}
-			
-			$res->setFetchMode(PDO::FETCH_CLASS, 'TreeNode');
-			
-			// Add children to node
-			while ( $result = $res->fetch() ) {
-				$this->addChild($result);
+			else {
+				$this->childrenList = -1; // If no comments found set the childrenList to -1
 			}
 		}
 	}
@@ -68,7 +101,7 @@ Class TreeNode {
 	}
 	
 	public function hasChildren() {
-		if ($this->children == 0) {
+		if ($this->children === false || $this->children === 0) {
 			return false;
 		}
 		else {
