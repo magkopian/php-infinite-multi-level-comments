@@ -4,8 +4,9 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-	define('INCLUDED',true); // Step 1. Add this define
-	require 'includes/markup_func.php';
+define('INCLUDED',true); // Step 1. Add this define
+require 'classes/CommentSection.php'; // Step 2. Add this require
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,18 +14,19 @@
 		<meta charset="UTF-8">
 		<title>Infinite level comments</title>
 		
-		<link rel="stylesheet" type="text/css" href="css/comments.css"> <!-- Step 2. Include comments.css -->
+		<link rel="stylesheet" type="text/css" href="css/comments.css"> <!-- Step 3. Include comments.css -->
 		
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> <!-- Step 3. Include jQuery -->
-		<script type="text/javascript" src="js/comments.js"></script> <!-- Step 4. Include comments.js -->
+		<script type="text/javascript" src="js/comments.js"></script> <!-- Step 5. Include comments.js -->
 	</head>
 	<body>
 		<div id="container">
 			<img src="http://farm8.staticflickr.com/7302/12837838873_7db7f47eca_n.jpg" title="Painting" alt="Image from: http://www.flickr.com/photos/penlr/">
 		</div>
-		<div class="comment-section"> <!-- Step 5. Create a div with class "comment-section" -->
-			<?php do_comments();?> <!-- Step 6. Inside tha div call do_comments() function -->
-		</div>
+		<?php
+			$comment_section = new CommentSection(); // Step 6. Create a new CommentSection object
+			$comment_section->doComments(); // Step 7. Call doComments method
+		?>
 	</body>
 </html>
 	
