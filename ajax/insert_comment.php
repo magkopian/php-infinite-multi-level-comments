@@ -49,6 +49,7 @@ if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-nam
 		
 		// If all user provided data is valid and trimmed
 		if ( $status_msg === array() ) {
+		
 			require '../includes/comments_func.php';
 			
 			// Insert the comment

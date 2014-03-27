@@ -33,7 +33,8 @@ function get_comments() {
 function insert_comment($msg, $parent, $author_name, $author_email) {
 	// Connect to database
 	try {
-		require 'dbconnect.php';
+		require_once '../classes/Database.php';
+		$handler = new Database();
 		
 		// Insert comment to database
 		if ($parent !== 'NULL') {

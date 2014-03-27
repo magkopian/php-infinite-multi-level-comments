@@ -38,7 +38,8 @@ function validate_parent($parent) {
 		
 		// Connect to database
 		try {
-			require 'dbconnect.php';
+			require_once '../classes/Database.php';
+			$handler = new Database();
 			
 			// Query database to see if parent id exists
 			$res = $handler->prepare('SELECT `cid` FROM `comment` WHERE `cid` = :parent');
