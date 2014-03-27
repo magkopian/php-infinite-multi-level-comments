@@ -22,7 +22,12 @@ function get_comments() {
 		return false;
 	}
 	
-	return $tree->getChildren($tree); // We don't want the peudo-node so we just return its children
+	if ($tree->hasChildren()) {
+		return $tree->getChildren($tree); // We don't want the peudo-node so we just return its children
+	}
+	else {
+		return -1;
+	}
 }
 
 function insert_comment($msg, $parent, $author_name, $author_email) {

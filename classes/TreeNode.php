@@ -6,7 +6,7 @@
 
 if (!defined('INCLUDED')){
 	define('INCLUDED',true);
-	require 'markup_func.php';
+	require '../includes/markup_func.php';
 	header('HTTP/1.1 403 Forbidden');
 	do_html_403();
 	die();
@@ -73,9 +73,8 @@ Class TreeNode {
 				while ( $child = $statement->fetchObject('TreeNode', array(false)) ) {
 					$this->addChild($child);
 				}
-			}
-			else {
-				$this->childrenList = -1; // If no comments found set the childrenList to -1
+				
+				$this->children = true;
 			}
 		}
 	}
