@@ -10,7 +10,6 @@ if (!defined('INCLUDED')){
 	die();
 }
 
-
 function do_html_403() { ?>
 <!DOCTYPE html">
 <html>

@@ -25,35 +25,36 @@ if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-nam
 	// Author surname must be empty, is supposed to be filled only by bots
 	if ( (!empty($msg) || $msg === '0') && !empty($author_name) && !empty($author_email) && empty($_POST['author-surname']) ) {
 	
-		require '../includes/validation_func.php';
+		require '../classes/Validation.php';
 		
 		// Validate comment length
-		if ( validate_len($msg, 255, 1) !== true ) {
+		if ( Validation::len($msg, 255, 1) !== true ) {
 			$status_msg[] = 'Your comment cannot exceed 255 characters';
 		}
 	
 		// Validate parent id
-		if ( validate_parent($parent) !== true ) {
+		if ( Validation::parent($parent) !== true ) {
 			$status_msg[] = 'Invalid parent id';
 		}
 		
 		// Validate author name
-		if ( validate_username($author_name) !== true ) {
+		if ( Validation::username($author_name) !== true ) {
 			$status_msg[] = 'Invalid name';
 		}
 		
 		// Validate email address
-		if ( validate_email($author_email) !== true ) {
+		if ( Validation::email($author_email) !== true ) {
 			$status_msg[] = 'Invalid email address';
 		}
 		
 		// If all user provided data is valid and trimmed
 		if ( $status_msg === array() ) {
 		
-			require '../includes/comments_func.php';
+			require '../classes/CommentHandler.php';
+			$comment_handler = new CommentHandler();
 			
 			// Insert the comment
-			if ( ( $msg_id = insert_comment($msg, $parent, $author_name, $author_email) ) !== false ) {
+			if ( ( $msg_id = $comment_handler->insert_comment($msg, $parent, $author_name, $author_email) ) !== false ) {
 				$response = array (
 					'status_code' => 0,
 					'message_id' => $msg_id,
