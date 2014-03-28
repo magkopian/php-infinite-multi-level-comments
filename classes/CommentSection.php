@@ -4,9 +4,12 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
+function __autoload($className) {
+     require "$className.php";
+}
+
 if (!defined('INCLUDED')){
 	define('INCLUDED',true);
-	require 'HttpErrorGenerator.php';
 	new HttpError(403);
 	die();
 }
@@ -18,8 +21,6 @@ class CommentSection {
 
 	public function __construct() {
 		try {
-			require 'TreeNode.php';
-			
 			$this->tree = new TreeNode(true); // We create a peudo-node that will fetch all node with null parent
 		}
 		catch (Exception $e) {

@@ -6,7 +6,6 @@
 
 if (!defined('INCLUDED')){
 	define('INCLUDED',true);
-	require 'HttpErrorGenerator.php';
 	new HttpError(403);
 	die();
 }
@@ -15,7 +14,6 @@ class CommentHandler {
 	public function insert_comment($msg, $parent, $author_name, $author_email) {
 		// Connect to database
 		try {
-			require_once 'Database.php';
 			$handler = new Database();
 			
 			// Insert comment to database

@@ -6,6 +6,10 @@
 
 define('INCLUDED',true);
 
+function __autoload($className) {
+     require "../classes/$className.php";
+}
+
 if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-name']) && isset($_POST['author-email']) && isset($_POST['author-surname']) ) {
 
 	$msg = trim($_POST['msg']);
@@ -24,8 +28,6 @@ if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-nam
 	
 	// Author surname must be empty, is supposed to be filled only by bots
 	if ( (!empty($msg) || $msg === '0') && !empty($author_name) && !empty($author_email) && empty($_POST['author-surname']) ) {
-	
-		require '../classes/Validation.php';
 		
 		// Validate comment length
 		if ( Validation::len($msg, 255, 1) !== true ) {
@@ -50,7 +52,6 @@ if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-nam
 		// If all user provided data is valid and trimmed
 		if ( $status_msg === array() ) {
 		
-			require '../classes/CommentHandler.php';
 			$comment_handler = new CommentHandler();
 			
 			// Insert the comment

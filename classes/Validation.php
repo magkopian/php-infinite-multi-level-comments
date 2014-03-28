@@ -6,7 +6,6 @@
 
 if (!defined('INCLUDED')){
 	define('INCLUDED',true);
-	require 'HttpErrorGenerator.php';
 	new HttpError(403);
 	die();
 }
@@ -38,7 +37,6 @@ class Validation {
 			
 			// Connect to database
 			try {
-				require_once '../classes/Database.php';
 				$handler = new Database();
 				
 				// Query database to see if parent id exists

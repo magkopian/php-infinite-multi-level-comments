@@ -6,7 +6,6 @@
 
 if (!defined('INCLUDED')){
 	define('INCLUDED',true);
-	require 'HttpErrorGenerator.php';
 	new HttpError(403);
 	die();
 }
@@ -25,7 +24,6 @@ Class TreeNode {
 		if ($this->hasChildren()) {
 			if ( $preparedStatement === null ) { // If this is a root node the statement hasn't been prepared yet so we prepare it
 				// Connect to database
-				require_once 'Database.php';
 				$handler = new Database();
 				
 				// Get comments from database
@@ -57,7 +55,6 @@ Class TreeNode {
 		}
 		else if ($rootNode === true) { // If this is a root node
 			// Connect to database
-			require_once 'Database.php';
 			$handler = new Database();
 			
 			// Get comments from database

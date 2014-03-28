@@ -6,7 +6,6 @@
 
 if (!defined('INCLUDED')){
 	define('INCLUDED',true);
-	require 'HttpErrorGenerator.php';
 	new HttpError(403);
 	die();
 }
