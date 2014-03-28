@@ -21,11 +21,12 @@ class CommentSection {
 			require 'TreeNode.php';
 			
 			$this->tree = new TreeNode(true); // We create a peudo-node that will fetch all node with null parent
-			$this->createDisplay();
 		}
 		catch (Exception $e) {
 			$this->status = false;
 		}
+		
+		$this->createDisplay();
 	}
 	
 	public function doComments() {
