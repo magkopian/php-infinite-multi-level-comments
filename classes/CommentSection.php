@@ -43,7 +43,7 @@ class CommentSection {
 		}
 		else if ( $this->tree->hasChildren() === false ) { // If no comment exist yet
 			$this->display .= 
-				'<ul class="message-body" id="">
+				'<ul class="message-body" id="message-">
 					<li class="reply-button">Click to add a comment...</li>
 					<li style="display: none;" class="msg-text">
 						<input type="text" name="author-name" placeholder="Name" class="txtfield">
@@ -62,7 +62,7 @@ class CommentSection {
 		}
 		else {
 			$this->display .= 
-				'<ul class="message-body" id="">
+				'<ul class="message-body" id="message-">
 					<li class="reply-button">Click to add a comment...</li>
 					<li style="display: none;" class="msg-text">
 						<input type="text" name="author-name" placeholder="Name" class="txtfield">
@@ -95,7 +95,7 @@ class CommentSection {
 		
 		foreach($tree as $twig) {
 			$display .= '<li>
-							<ul class="message-body" id="'. $twig->getCid() . '">
+							<ul class="message-body" id="message-'. $twig->getCid() . '">
 								<li class="author">' . htmlentities($twig->getAuthor(), ENT_QUOTES, 'UTF-8') . ':</li>
 								<li class="comment-msg">' . htmlentities($twig->getMessage(), ENT_QUOTES, 'UTF-8') . '</li>
 								<li class="reply-button">Click to reply...</li>
