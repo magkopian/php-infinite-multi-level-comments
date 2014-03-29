@@ -24,8 +24,8 @@ require 'classes/CommentSection.php'; // Step 2. Add this require
 			<img src="http://farm8.staticflickr.com/7302/12837838873_7db7f47eca_n.jpg" title="Painting" alt="Image from: http://www.flickr.com/photos/penlr/">
 		</div>
 		<?php
-			$comment_section = new CommentSection(); // Step 6. Create a new CommentSection object
-			$comment_section->doComments(); // Step 7. Call doComments method
+			$comment_section = new CommentSection(); // Step 6. Create a new CommentSection Object
+			$comment_section->doComments(); // Step 7. Call doComments Method
 		?>
 	</body>
 </html>
