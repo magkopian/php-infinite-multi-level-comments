@@ -15,13 +15,20 @@ if (!defined('INCLUDED')){
 }
 
 class CommentSection {
+	private $sid = null; // Comment Section ID
 	private $tree = null;
 	private $status = true;
 	private $display = '';
 
-	public function __construct() {
+	public function __construct ( $sid ) {
+		
+		if ( ($this->sid = (int) $sid) <= 0 ) {
+			$this->sid = null;
+			throw new InvalidArgumentException('Section ID must be a positive integer');
+		}
+		
 		try {
-			$this->tree = new TreeNode(true); // We create a peudo-node that will fetch all node with null parent
+			$this->tree = new TreeNode($this->sid, true); // We create a peudo-node that will fetch all node with null parent
 		}
 		catch (Exception $e) {
 			$this->status = false;
@@ -49,6 +56,7 @@ class CommentSection {
 						<input type="text" name="author-name" placeholder="Name" class="txtfield">
 						<input type="text" name="author-surname" placeholder="Surname" class="txtfield">
 						<input type="text" name="author-email" placeholder="Email" class="txtfield">
+						<input type="hidden" name="sid" value="' . $this->sid . '">
 						<textarea placeholder="Message"></textarea>
 					</li>
 					<li style="display: none;" class="hide-reply-box">Click to hide</li>
@@ -68,6 +76,7 @@ class CommentSection {
 						<input type="text" name="author-name" placeholder="Name" class="txtfield">
 						<input type="text" name="author-surname" placeholder="Surname" class="txtfield">
 						<input type="text" name="author-email" placeholder="Email" class="txtfield">
+						<input type="hidden" name="sid" value="' . $this->sid . '">
 						<textarea placeholder="Message"></textarea>
 					</li>
 					<li style="display: none;" class="hide-reply-box">Click to hide</li>
@@ -103,6 +112,7 @@ class CommentSection {
 									<input type="text" name="author-name" placeholder="Name" class="txtfield">
 									<input type="text" name="author-surname" placeholder="Surname" class="txtfield">
 									<input type="text" name="author-email" placeholder="Email" class="txtfield">
+									<input type="hidden" name="sid" value="' . $this->sid . '">
 									<textarea placeholder="Message"></textarea>
 								</li>
 								<li class="hide-reply-box">Click to hide</li>

@@ -38,7 +38,8 @@ $(document).ready(function() {
 			var parent_id = $(this).parent('.msg-text').parent('.message-body').attr('id').slice(8);
 			var author_name = $(this).parent('.msg-text').children('[name="author-name"]').val().trim();
 			var author_email = $(this).parent('.msg-text').children('[name="author-email"]').val().trim();
-			var author_surname = $(this).parent('.msg-text').children('[name="author-surname"]').val().trim(); // Not supposed to be submited, just to block bots
+			var section_id = $(this).parent('.msg-text').children('[name="sid"]').val().trim();
+			var author_surname = $(this).parent('.msg-text').children('[name="author-surname"]').val().trim(); // Not supposed to be filled, just to block bots
 			
 			// Send comment and parent id to server via ajax
 			$.ajax({
@@ -50,7 +51,8 @@ $(document).ready(function() {
 					'parent': parent_id, 
 					'author-name': author_name,
 					'author-email': author_email,
-					'author-surname': author_surname
+					'author-surname': author_surname,
+					'sid': section_id
 				},
 				success: function (data) {
 					if (data.status_code != 0) {
@@ -71,10 +73,10 @@ $(document).ready(function() {
 					else {
 						if (parent_id != '') {
 							// Insert new comment with id="data.message_id"
-							$('#message-' + parent_id).after('<ul><li><ul id="message-' + data.message_id + '" class="message-body"><li class="author">' + htmlEncode(data.author) + ':</li><li class="comment-msg">' + htmlEncode(msg_txt) + '</li><li class="reply-button" style="display: list-item;">Click to reply...</li><li class="msg-text" style="display: none;"><input type="text" name="author-name" placeholder="Name" class="txtfield"><input type="text" name="author-surname" placeholder="Surname" class="txtfield"><input type="text" name="author-email" placeholder="Email" class="txtfield"><textarea></textarea></li><li class="hide-reply-box" style="display: none;">Click to hide</li></ul></li></ul>');
+							$('#message-' + parent_id).after('<ul><li><ul id="message-' + data.message_id + '" class="message-body"><li class="author">' + htmlEncode(data.author) + ':</li><li class="comment-msg">' + htmlEncode(msg_txt) + '</li><li class="reply-button" style="display: list-item;">Click to reply...</li><li class="msg-text" style="display: none;"><input type="text" name="author-name" placeholder="Name" class="txtfield"><input type="text" name="author-surname" placeholder="Surname" class="txtfield"><input type="text" name="author-email" placeholder="Email" class="txtfield"><input type="hidden" name="sid" value="' + section_id + '"><textarea></textarea></li><li class="hide-reply-box" style="display: none;">Click to hide</li></ul></li></ul>');
 						}
 						else {
-							$('div.comment-section > ul > li:first-child > .message-body:first-child').before('<ul id="message-' + data.message_id + '" class="message-body"><li class="author">' + htmlEncode(data.author) + ':</li><li class="comment-msg">' + htmlEncode(msg_txt) + '</li><li class="reply-button" style="display: list-item;">Click to reply...</li><li class="msg-text" style="display: none;"><input type="text" name="author-name" placeholder="Name" class="txtfield"><input type="text" name="author-surname" placeholder="Surname" class="txtfield"><input type="text" name="author-email" placeholder="Email" class="txtfield"><textarea></textarea></li><li class="hide-reply-box" style="display: none;">Click to hide</li></ul>');
+							$('div.comment-section > ul > li:first-child > .message-body:first-child').before('<ul id="message-' + data.message_id + '" class="message-body"><li class="author">' + htmlEncode(data.author) + ':</li><li class="comment-msg">' + htmlEncode(msg_txt) + '</li><li class="reply-button" style="display: list-item;">Click to reply...</li><li class="msg-text" style="display: none;"><input type="text" name="author-name" placeholder="Name" class="txtfield"><input type="text" name="author-surname" placeholder="Surname" class="txtfield"><input type="text" name="author-email" placeholder="Email" class="txtfield"><input type="hidden" name="sid" value="' + section_id + '"><textarea></textarea></li><li class="hide-reply-box" style="display: none;">Click to hide</li></ul>');
 						}
 						
 						// Hide reply box

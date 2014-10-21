@@ -11,7 +11,7 @@ if (!defined('INCLUDED')){
 }
 
 class CommentHandler {
-	public function insert_comment($msg, $parent, $author_name, $author_email) {
+	public function insert_comment($sid, $msg, $parent, $author_name, $author_email) {
 		// Connect to database
 		try {
 			$handler = new Database();
@@ -21,8 +21,9 @@ class CommentHandler {
 				$handler->beginTransaction(); // If comment has a parent begin transaction
 			}
 			
-			$res = $handler->prepare('INSERT INTO `comment`(`author_name`, `author_email`, `message`, `parent`) VALUES (:author_name, :author_email, :message, :parent)');
+			$res = $handler->prepare('INSERT INTO `comment`(`sid`, `author_name`, `author_email`, `message`, `parent`) VALUES (:sid, :author_name, :author_email, :message, :parent)');
 			$res->execute( array(
+				':sid' => $sid,
 				':author_name' => $author_name,
 				':author_email' => $author_email,
 				':message' => $msg,

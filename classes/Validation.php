@@ -24,6 +24,14 @@ class Validation {
 		}
 		return true;
 	}
+	
+	public static function sid ($sid) {
+		if ( ((int) $sid) <= 0 ) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	public static function parent ($parent) {
 		if ($parent === null) { // If parent is null

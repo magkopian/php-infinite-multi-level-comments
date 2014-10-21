@@ -11,16 +11,20 @@ if (!defined('INCLUDED')){
 }
 
 Class TreeNode {
-	private $cid = null; // Comment id
+	private $cid = null; // Comment ID
+	private $sid = null; // Section ID
 	private $message = ''; // Message text
 	private $author = ''; // Author name
 	private $time = ''; // The time when comment has been posted
-	private $parent = null; // Comment id of the parent comment
+	private $parent = null; // Comment ID of the parent comment
 	private $children = false; // If the node has children 1 otherwise 0 (hasChildren() method returns true/false)
 	private $childrenList = null; // Array with children objects
 	private $preparedStatement = null; // The prepared statement that gets the child nodes
 	
-	public function __construct($rootNode = false, $preparedStatement = null) {
+	public function __construct ( $sid, $rootNode = false, $preparedStatement = null ) {
+		
+		$this->sid = $sid;
+		
 		if ($this->hasChildren()) {
 			if ( $preparedStatement === null ) { // If this is a root node the statement hasn't been prepared yet so we prepare it
 				// Connect to database
@@ -58,23 +62,30 @@ Class TreeNode {
 			$handler = new Database();
 			
 			// Get comments from database
-			$statement = $handler->query('
+			$this->preparedStatement = $handler->prepare('
 				SELECT `cid`, `message`, `parent`, `children`, `time`, `author_name` AS `author`
 				FROM `comment`
-				WHERE `parent` IS NULL
+				WHERE `sid` = :sid
+				AND `parent` IS NULL
 				ORDER BY `time` DESC
 			');
 			
+			// Bind the ID of the comment section and execute the statement
+			$this->preparedStatement->execute( array(
+				':sid' => $this->sid
+			));
+			
 			// If table not empty
-			if ($statement->rowCount() > 0) {
+			if ($this->preparedStatement->rowCount() > 0) {
 				// Add children to node
-				while ( $child = $statement->fetchObject('TreeNode', array(false)) ) {
+				while ( $child = $this->preparedStatement->fetchObject('TreeNode', array(false)) ) {
 					$this->addChild($child);
 				}
 				
 				$this->children = true;
 			}
 		}
+		
 	}
 	
 	public function getCid() {

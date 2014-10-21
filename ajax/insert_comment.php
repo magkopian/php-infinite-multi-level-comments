@@ -10,8 +10,9 @@ function __autoload($className) {
      require "../classes/$className.php";
 }
 
-if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-name']) && isset($_POST['author-email']) && isset($_POST['author-surname']) ) {
+if ( isset($_POST['msg'], $_POST['parent'], $_POST['author-name'], $_POST['author-email'], $_POST['author-surname'], $_POST['sid']) ) {
 
+	$sid = (int) $_POST['sid'];
 	$msg = trim($_POST['msg']);
 	
 	if ( empty($_POST['parent']) ) {
@@ -34,9 +35,14 @@ if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-nam
 			$status_msg[] = 'Your comment cannot exceed 255 characters';
 		}
 	
+		// Validate parent sid
+		if ( Validation::sid($sid) !== true ) {
+			$status_msg[] = 'Invalid section ID';
+		}
+		
 		// Validate parent id
 		if ( Validation::parent($parent) !== true ) {
-			$status_msg[] = 'Invalid parent id';
+			$status_msg[] = 'Invalid parent ID';
 		}
 		
 		// Validate author name
@@ -55,7 +61,7 @@ if ( isset($_POST['msg']) && isset($_POST['parent']) && isset($_POST['author-nam
 			$comment_handler = new CommentHandler();
 			
 			// Insert the comment
-			if ( ( $msg_id = $comment_handler->insert_comment($msg, $parent, $author_name, $author_email) ) !== false ) {
+			if ( ( $msg_id = $comment_handler->insert_comment($sid, $msg, $parent, $author_name, $author_email) ) !== false ) {
 				$response = array (
 					'status_code' => 0,
 					'message_id' => $msg_id,
