@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.4.11.1deb2+deb7u1
 -- http://www.phpmyadmin.net
 --
--- Φιλοξενητής: localhost
--- Χρόνος δημιουργίας: 25 Μαρ 2014 στις 23:42:16
--- Έκδοση Διακομιστή: 5.5.23
--- Έκδοση PHP: 5.3.8
+-- Host: localhost
+-- Generation Time: Oct 21, 2014 at 05:38 PM
+-- Server version: 5.5.38
+-- PHP Version: 5.4.4-14+deb7u14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,17 +17,19 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Βάση: `inf_comments`
+-- Database: `inf_comments`
 --
 
 -- --------------------------------------------------------
 
 --
--- Δομή Πίνακα για τον Πίνακα `comment`
+-- Table structure for table `comment`
 --
 
+DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `cid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `sid` smallint(5) unsigned NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message` varchar(255) NOT NULL,
   `parent` smallint(5) unsigned DEFAULT NULL,
@@ -36,14 +38,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `author_email` varchar(255) NOT NULL,
   PRIMARY KEY (`cid`),
   KEY `parent` (`parent`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=115 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 --
--- Περιορισμοί για άχρηστους πίνακες
+-- Constraints for dumped tables
 --
 
 --
--- Περιορισμοί για πίνακα `comment`
+-- Constraints for table `comment`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`parent`) REFERENCES `comment` (`cid`);
