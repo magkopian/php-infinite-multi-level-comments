@@ -98,11 +98,11 @@ Class TreeNode {
 	}
 	
 	public function hasChildren() {
-		if ($this->children === false || $this->children === 0) {
-			return false;
+		if ( $this->children > 0 ) {
+			return true;
 		}
 		else {
-			return true;
+			return false;
 		}
 	}
 	
