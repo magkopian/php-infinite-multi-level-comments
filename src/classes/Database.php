@@ -4,12 +4,6 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-if (!defined('INCLUDED')){
-	define('INCLUDED',true);
-	new HttpError(403);
-	die();
-}
-
 class Database extends PDO {
 	const DATABASE = 'inf_comments';
 	const HOST = '127.0.0.1';
@@ -22,4 +16,3 @@ class Database extends PDO {
 		$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 }
-?>

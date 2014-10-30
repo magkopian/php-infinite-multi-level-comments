@@ -4,12 +4,6 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-if (!defined('INCLUDED')){
-	define('INCLUDED',true);
-	new HttpError(403);
-	die();
-}
-
 Class TreeNode {
 	private $cid = null; // Comment ID
 	private $sid = null; // Section ID
@@ -125,4 +119,3 @@ Class TreeNode {
 		$this->childrenList[$child->getCid()] = $child;
 	}
 }
-?>

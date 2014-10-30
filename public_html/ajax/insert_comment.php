@@ -4,11 +4,7 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-define('INCLUDED',true);
-
-function __autoload($className) {
-     require "../classes/$className.php";
-}
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 if ( isset($_POST['msg'], $_POST['parent'], $_POST['author-name'], $_POST['author-email'], $_POST['author-surname'], $_POST['sid']) ) {
 

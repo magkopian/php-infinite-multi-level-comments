@@ -4,12 +4,6 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-if (!defined('INCLUDED')){
-	define('INCLUDED',true);
-	new HttpError(403);
-	die();
-}
-
 class Validation {
 	public static function len ($str, $max_len, $min_len = 1) {
 		if ($max_len !== 'inf') {
@@ -93,4 +87,3 @@ class Validation {
 		return true;
 	}
 }
-?>

@@ -4,12 +4,6 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-if (!defined('INCLUDED')){
-	define('INCLUDED',true);
-	new HttpError(403);
-	die();
-}
-
 class CommentHandler {
 	public function insert_comment($sid, $msg, $parent, $author_name, $author_email) {
 		// Connect to database
@@ -55,4 +49,3 @@ class CommentHandler {
 		return $cid;
 	}
 }
-?>

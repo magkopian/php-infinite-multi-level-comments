@@ -4,11 +4,6 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-if (!defined('INCLUDED')){
-	new HttpError(403);
-	die();
-}
-
 class HttpError {
 
 	public function __construct ($errorCode) {
@@ -37,4 +32,3 @@ class HttpError {
 	}
 	
 }
-?>

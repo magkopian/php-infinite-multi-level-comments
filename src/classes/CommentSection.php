@@ -4,16 +4,6 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-function __autoload($className) {
-     require "$className.php";
-}
-
-if (!defined('INCLUDED')){
-	define('INCLUDED',true);
-	new HttpError(403);
-	die();
-}
-
 class CommentSection {
 	private $sid = null; // Comment Section ID
 	private $tree = null;
@@ -130,4 +120,3 @@ class CommentSection {
 	}
 	
 }
-?>
