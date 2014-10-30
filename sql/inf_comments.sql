@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 21, 2014 at 05:38 PM
--- Server version: 5.5.38
+-- Generation Time: Oct 30, 2014 at 11:18 PM
+-- Server version: 5.5.40
 -- PHP Version: 5.4.4-14+deb7u14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `cid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `sid` smallint(5) unsigned NOT NULL,
