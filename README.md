@@ -23,7 +23,6 @@ add your database credentials to it.
 
 After that, use the `sql/inf_comments.sql` to generate the `comment` table in your database.
 
-Finally, copy the `vendor/magkopian/php-infinite-multi-level-comments/public_html` directory inside the 
-directory you have installed the comment system.
+Finally, copy the `public_html` directory inside the directory you have installed the comment system.
 
 You can try the comment system by running the demo.php from your browser.
