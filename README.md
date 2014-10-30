@@ -19,6 +19,11 @@ Alternatively you can add it as a dependency in you `composer.json` file,
 and run `composer install`.
 
 After installing the comment system move the `Config.template.php` file to `src/classes/Config.php` and
-add to it your database credentials.
+add your database credentials to it.
 
-Finaly use the `sql/inf_comments.sql` to generate the `comment` table in your database.
+After that, use the `sql/inf_comments.sql` to generate the `comment` table in your database.
+
+Finally, copy the `vendor/magkopian/php-infinite-multi-level-comments/public_html` directory inside the 
+directory you have installed the comment system.
+
+You can try the comment system by running the demo.php from your browser.
