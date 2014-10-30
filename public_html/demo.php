@@ -7,8 +7,7 @@
 // Step 1: Include composer autoload file
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-// Step 2: Create a new CommentSection Object 
-// (You need also to supply an ID for the comment section)
+// Step 2: Create a new CommentSection Object (You need also to supply an ID for the comment section)
 $comment_section = new CommentSection(1);
 ?>
 <!DOCTYPE html>
@@ -31,4 +30,3 @@ $comment_section = new CommentSection(1);
 		?>
 	</body>
 </html>
-	
