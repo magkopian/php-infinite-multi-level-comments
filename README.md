@@ -21,6 +21,8 @@ and run `composer install`.
 After installing the comment system move the `Config.template.php` file to `src/classes/Config.php` and
 add your database credentials to it.
 
+Run `composer dump-autoload` to regenerate the autoloading files after copying the Config class.
+
 After that, use the `sql/inf_comments.sql` to generate the `comment` table in your database.
 
 Finally, copy the `public_html` directory inside the directory you have installed the comment system
