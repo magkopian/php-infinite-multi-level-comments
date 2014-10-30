@@ -5,7 +5,7 @@
 \**********************************************/
 
 // Step 1: Include composer autoload file
-require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Step 2: Create a new CommentSection Object (You need also to supply an ID for the comment section)
 $comment_section = new CommentSection(1);
@@ -17,9 +17,9 @@ $comment_section = new CommentSection(1);
 		<title>Infinite level comments</title>
 		
 		<!-- Step 3: Include comments.css, jQuery and comments.js -->
-		<link rel="stylesheet" type="text/css" href="/css/comments.css">
+		<link rel="stylesheet" type="text/css" href="css/comments.css">
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script type="text/javascript" src="/js/comments.js"></script>
+		<script type="text/javascript" src="js/comments.js"></script>
 	</head>
 	<body>
 		<div id="container">

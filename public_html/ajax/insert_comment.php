@@ -4,7 +4,7 @@
 * See the file LICENCE for copying permission. *
 \**********************************************/
 
-require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 if ( isset($_POST['msg'], $_POST['parent'], $_POST['author-name'], $_POST['author-email'], $_POST['author-surname'], $_POST['sid']) ) {
 
