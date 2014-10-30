@@ -1,4 +1,15 @@
 {
+	"name": "magkopian/php-infinite-multi-level-comments",
+	"description": "An AJAX multi-level comment system, that allows infinite level comment and replies",
+	"keywords": ["comments","multi level comments","infinite replies","ajax comments"],
+	"license": "MIT",
+	"authors": [{
+			"name": "Manolis Agkopian",
+			"email": "m.agkopian@gmail.com"
+	}],
+	"require": {
+		"php": ">=5.3"
+	},
 	"autoload": {
 		"classmap": [
 			"src/classes"
