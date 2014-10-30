@@ -21,4 +21,4 @@ and run `composer install`.
 After installing the comment system move the `Config.template.php` file to `src/classes/Config.php` and
 add to it your database credentials.
 
-Finaly use the `sql/inf_comments.sql` to generate the `comment` in your database.
+Finaly use the `sql/inf_comments.sql` to generate the `comment` table in your database.
